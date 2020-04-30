@@ -1,9 +1,7 @@
-package main
-
-import "fmt"
+package sortalgorithm
 
 // Used in Selection sort
-func min_idx(a []int) int {
+func minIdx(a []int) int {
 	min := a[0]
 	idx := 0
 	for i, v := range a {
@@ -15,43 +13,41 @@ func min_idx(a []int) int {
 	return idx
 }
 
-func BubbleSort(arr []int) []int {
-	ans := make([]int, len(arr))
-	copy(ans, arr)
+// BubbleSort is one of a sort algorithm
+func BubbleSort(arr []int) {
 	for i := len(arr) - 1; i >= 0; i-- {
 		for j := 0; j < i; j++ {
-			if ans[j+1] < ans[j] {
-				ans[j], ans[j+1] = ans[j+1], ans[j]
+			if arr[j+1] < arr[j] {
+				arr[j], arr[j+1] = arr[j+1], arr[j]
 			}
 		}
 	}
-	return ans
+	return
 }
 
-func InsertionSort(arr []int) []int {
-	ans := make([]int, len(arr))
-	copy(ans, arr)
+// InsertionSort is one of a sort algorithm
+func InsertionSort(arr []int) {
 	for i := 1; i < len(arr)-1; i++ {
 		for j := i + 1; j >= 1; j-- {
-			if ans[j-1] > ans[j] {
-				ans[j-1], ans[j] = ans[j], ans[j-1]
+			if arr[j-1] > arr[j] {
+				arr[j-1], arr[j] = arr[j], arr[j-1]
 			}
 		}
 	}
-	return ans
+	return
 }
 
-func SelectionSort(arr []int) []int {
+// SelectionSort is one of a sort algorithm
+func SelectionSort(arr []int) {
 	var idx int
-	ans := make([]int, len(arr))
-	copy(ans, arr)
 	for i := 0; i <= len(arr)-1; i++ {
-		idx = min_idx(ans[i:]) + len(ans[:i])
-		ans[i], ans[idx] = ans[idx], ans[i]
+		idx = minIdx(arr[i:]) + len(arr[:i])
+		arr[i], arr[idx] = arr[idx], arr[i]
 	}
-	return ans
+	return
 }
 
+// QuickSort is one of a sort algorithm
 func QuickSort(arr []int) []int {
 	n := len(arr)
 	if n <= 1 {
@@ -76,6 +72,7 @@ func QuickSort(arr []int) []int {
 
 }
 
+// MergeSort is one of a sort algorithm
 func MergeSort(arr []int) []int {
 	n := len(arr)
 	if n == 1 {
@@ -108,14 +105,4 @@ func MergeSort(arr []int) []int {
 	}
 	return sortedArr
 
-}
-
-func main() {
-	arr := []int{12, 9, 15, 3, 8, 17, 6, 5}
-	fmt.Println("Original array ", arr)
-	fmt.Println("   Bubble sort ", BubbleSort(arr))
-	fmt.Println("Insertion sort ", InsertionSort(arr))
-	fmt.Println("Selection sort ", SelectionSort(arr))
-	fmt.Println("    Quick sort ", QuickSort(arr))
-	fmt.Println("    Merge sort ", MergeSort(arr))
 }
